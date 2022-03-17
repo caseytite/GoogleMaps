@@ -45,6 +45,7 @@ function App() {
       },
     ]);
   }, []);
+  
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
@@ -83,6 +84,7 @@ function App() {
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(22, 5),
             }}
+            animation={2}
             onClick={() => {
               setInfo(marker);
             }}
@@ -93,11 +95,11 @@ function App() {
             position={{ lat: info.lat, lng: info.lng }}
             onCloseClick={() => {
               setInfo(null);
-            }}
+            }}            
           >
             <div>
-              <h2>Location</h2>
-              <p>Pinned {formatRelative(info.time, new Date())}</p>
+              <h2>Your new pin! </h2>
+              <p>Created { formatRelative(info.time, new Date())}</p>
             </div>
           </InfoWindow>
         ) : null}
