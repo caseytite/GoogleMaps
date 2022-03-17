@@ -5,6 +5,10 @@ A basic google maps project built with React where a user can drop pins, search 
 ###### This project was done with the help of this [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
 
 
+### Overview of the map
+
+![''](https://github.com/caseytite/GoogleMaps/blob/main/docs/Screen%20Shot%202022-03-16%20at%208.52.21%20PM.png?raw=true)
+
 ### The map search field
 ![''](https://github.com/caseytite/GoogleMaps/blob/main/docs/Screen%20Shot%202022-03-16%20at%208.40.29%20PM.png?raw=true)
 
