@@ -66,6 +66,8 @@ function App() {
     setMarker([...otherMarkers, currentMarker]);
     setShow(true);
     setAdd(false);
+    setTitle("");
+    setDesc("");
   };
 
   const mapReference = useRef();
@@ -90,7 +92,7 @@ function App() {
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={defaultLocation}
-        onClick={onMapClick}
+        onClick={(e) => (info ? null : onMapClick(e))}
         onLoad={onMapLoad}
         options={options}
       >
