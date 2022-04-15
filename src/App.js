@@ -52,6 +52,7 @@ function App() {
       },
     ]);
     setAdd(false);
+    setShow(false);
   }, []);
 
   const updateMarker = (t, d) => {
@@ -63,9 +64,6 @@ function App() {
     currentMarker.desc = d;
     currentMarker.title = t;
     setMarker([...otherMarkers, currentMarker]);
-    // console.log("new", newInfo);
-    // console.log("time", info.time);
-
     setShow(true);
     setAdd(false);
   };
@@ -118,7 +116,6 @@ function App() {
             onCloseClick={() => {
               setInfo(null);
               setAdd(false);
-              setShow(false);
             }}
           >
             <div>
