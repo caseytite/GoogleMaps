@@ -1,19 +1,19 @@
-import React, { useState, useCallback, useRef } from 'react';
-import Search from './components/Search';
-import LocateUser from './components/LocateUser';
+import React, { useState, useCallback, useRef } from "react";
+import Search from "./components/Search";
+import LocateUser from "./components/LocateUser";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
-} from '@react-google-maps/api';
-import { formatRelative } from 'date-fns';
-import mapStyles from './mapStyles';
-import "@reach/combobox/styles.css"
+} from "@react-google-maps/api";
+import { formatRelative, set } from "date-fns";
+import mapStyles from "./mapStyles";
+import "@reach/combobox/styles.css";
 
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
+  width: "100vw",
+  height: "100vh",
 };
 const defaultLocation = {
   lat: 48.428421,
@@ -22,18 +22,21 @@ const defaultLocation = {
 const options = {
   styles: mapStyles,
   disableDefaultUI: true,
-  zoomControl: true
+  zoomControl: true,
 };
 
 function App() {
-  const [ libraries ] = useState(['places']);
+  const [libraries] = useState(["places"]);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries
+    libraries,
   });
 
   const [markers, setMarker] = useState([]);
   const [info, setInfo] = useState(null);
+  const [add, setAdd] = useState(false);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
 
   const onMapClick = useCallback((event) => {
     setMarker((prev) => [
@@ -45,25 +48,39 @@ function App() {
       },
     ]);
   }, []);
-  
+  const details = add ? (
+    <div>
+      <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
+      <input value={desc} onChange={(e) => setDesc(e.target.value)}></input>
+      <button onClick={() => setAdd(false)}>Add Details</button>
+    </div>
+  ) : (
+    <div>
+      <h2>{!title ? "Your new pin!" : title} </h2>
+      <p>Created {() => formatRelative(info.time, new Date())}</p>
+      {desc && <p>{desc}</p>}
+      <button onClick={() => setAdd(true)}>
+        {!title || !desc ? "Add Details" : "Edit Details"}
+      </button>
+    </div>
+  );
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
     mapReference.current = map;
   }, []);
 
-  const moveTo = useCallback(({lat,lng}) => {
-    mapReference.current.panTo({lat,lng})
-    mapReference.current.setZoom(15)
-    }, [])
+  const moveTo = useCallback(({ lat, lng }) => {
+    mapReference.current.panTo({ lat, lng });
+    mapReference.current.setZoom(15);
+  }, []);
 
-  if (loadError) return 'Error on map load';
-  if (!isLoaded) return 'Loading maps';
+  if (loadError) return "Error on map load";
+  if (!isLoaded) return "Loading maps";
 
   return (
     <div>
-
-      <Search moveTo={moveTo}/>
+      <Search moveTo={moveTo} />
       <LocateUser moveTo={moveTo} />
 
       <GoogleMap
@@ -79,7 +96,7 @@ function App() {
             key={marker.time.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
-              url: '/hand-point-right-solid.svg',
+              url: "/hand-point-right-solid.svg",
               scaledSize: new window.google.maps.Size(20, 20),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(22, 5),
@@ -95,12 +112,9 @@ function App() {
             position={{ lat: info.lat, lng: info.lng }}
             onCloseClick={() => {
               setInfo(null);
-            }}            
+            }}
           >
-            <div>
-              <h2>Your new pin! </h2>
-              <p>Created { formatRelative(info.time, new Date())}</p>
-            </div>
+            {details}
           </InfoWindow>
         ) : null}
       </GoogleMap>
