@@ -37,33 +37,38 @@ function App() {
   const [add, setAdd] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [show, setShow] = useState(false);
 
   const onMapClick = useCallback((event) => {
+    console.log("markers", markers);
     setMarker((prev) => [
       ...prev,
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
         time: new Date(),
+        desc,
+        title,
       },
     ]);
+    setAdd(false);
   }, []);
-  const details = add ? (
-    <div>
-      <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
-      <input value={desc} onChange={(e) => setDesc(e.target.value)}></input>
-      <button onClick={() => setAdd(false)}>Add Details</button>
-    </div>
-  ) : (
-    <div>
-      <h2>{!title ? "Your new pin!" : title} </h2>
-      <p>Created {() => formatRelative(info.time, new Date())}</p>
-      {desc && <p>{desc}</p>}
-      <button onClick={() => setAdd(true)}>
-        {!title || !desc ? "Add Details" : "Edit Details"}
-      </button>
-    </div>
-  );
+
+  const updateMarker = (t, d) => {
+    const currentMarker = markers.find((marker) => marker.time === info.time);
+    const otherMarkers = markers.filter((marker) => marker.time !== info.time);
+    console.log("cur", currentMarker);
+    console.log("other", otherMarkers);
+
+    currentMarker.desc = d;
+    currentMarker.title = t;
+    setMarker([...otherMarkers, currentMarker]);
+    // console.log("new", newInfo);
+    // console.log("time", info.time);
+
+    setShow(true);
+    setAdd(false);
+  };
 
   const mapReference = useRef();
   const onMapLoad = useCallback((map) => {
@@ -112,9 +117,37 @@ function App() {
             position={{ lat: info.lat, lng: info.lng }}
             onCloseClick={() => {
               setInfo(null);
+              setAdd(false);
+              setShow(false);
             }}
           >
-            {details}
+            <div>
+              {!add && (
+                <>
+                  <h2>{!show ? "Your new pin!" : info.title} </h2>
+                  <p>Created {formatRelative(info.time, new Date())}</p>
+                  {show && <p>{info.desc}</p>}
+                  <button onClick={() => setAdd(true)}>
+                    {!show ? "Add Details" : "Edit Details"}
+                  </button>
+                </>
+              )}
+              {add && (
+                <>
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  ></input>
+                  <input
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                  ></input>
+                  <button onClick={() => updateMarker(title, desc)}>
+                    Add Details
+                  </button>
+                </>
+              )}
+            </div>
           </InfoWindow>
         ) : null}
       </GoogleMap>
