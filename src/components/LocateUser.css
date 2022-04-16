@@ -1,4 +1,4 @@
-.locate{
+.locate {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -8,10 +8,9 @@
   width: 100px;
   height: 42px;
   border-radius: 4px;
-  
-
 }
-.locate:hover{
+.locate:hover {
   border: 1px solid black;
   box-shadow: 3px 3px #888888;
+  cursor: pointer;
 }

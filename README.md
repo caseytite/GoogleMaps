@@ -2,19 +2,19 @@
 
 A basic google maps project built with React where a user can drop pins, search for places and if they got lost, locate themselves!
 
-###### This project was done with the help of this [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
+###### This project was done with the help of [this video](https://www.youtube.com/watch?v=WZcxJGmLbSo)
 
+### Adding and Editing pins
 
-### Overview of the map
+![''](https://media1.giphy.com/media/jVQHlC5q6z7GXRl4hH/giphy.gif?cid=790b7611a217ae173636fd5e507d0992da702c1f43c95250&rid=giphy.gif&ct=g)
 
-![''](https://github.com/caseytite/GoogleMaps/blob/main/docs/Screen%20Shot%202022-03-16%20at%208.52.21%20PM.png?raw=true)
+### Search for a location
 
-### The map search field
-![''](https://github.com/caseytite/GoogleMaps/blob/main/docs/Screen%20Shot%202022-03-16%20at%208.40.29%20PM.png?raw=true)
+![''](https://media2.giphy.com/media/r9JVe4PULwlOP0sEsr/giphy.gif?cid=790b76110ef42b89bb4238bbe74fd4bf5d689930ab77cce6&rid=giphy.gif&ct=g)
 
-### A pinned location
+### Find me Button
 
-![''](https://github.com/caseytite/GoogleMaps/blob/main/docs/Screen%20Shot%202022-03-16%20at%208.40.56%20PM.png?raw=true)
+![''](https://media4.giphy.com/media/kmGPpL4RN9Spvrkpiw/giphy.gif?cid=790b76118dbce216275a5d3062d3906841d51b0b078c05c0&rid=giphy.gif&ct=g)
 
 # Getting Started with Create React App
 

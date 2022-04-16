@@ -35,12 +35,11 @@ function App() {
 
   const [markers, setMarker] = useState([]);
   const [info, setInfo] = useState(null);
-  const [add, setAdd] = useState(false);
+  const [addDescription, setAddDescription] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
   const onMapClick = useCallback((event) => {
-    console.log("markers", markers);
     setMarker((prev) => [
       ...prev,
       {
@@ -51,20 +50,18 @@ function App() {
         title,
       },
     ]);
-    setAdd(false);
+    setAddDescription(false);
   }, []);
 
   const updateMarker = (t, d) => {
     const currentMarker = markers.find((marker) => marker.time === info.time);
     const otherMarkers = markers.filter((marker) => marker.time !== info.time);
-    console.log("cur", currentMarker);
-    console.log("other", otherMarkers);
 
     currentMarker.desc = d;
     currentMarker.title = t;
     setMarker([...otherMarkers, currentMarker]);
 
-    setAdd(false);
+    setAddDescription(false);
     setTitle("");
     setDesc("");
   };
@@ -116,19 +113,21 @@ function App() {
             position={{ lat: info.lat, lng: info.lng }}
             onCloseClick={() => {
               setInfo(null);
-              setAdd(false);
+              setAddDescription(false);
             }}
           >
             <div>
-              {!add && (
+              {!addDescription && (
                 <div>
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
                   <p>Created {formatRelative(info.time, new Date())}</p>
                   {!info.desc && <p>{info.desc}</p>}
-                  <button onClick={() => setAdd(true)}>Edit Details</button>
+                  <button onClick={() => setAddDescription(true)}>
+                    Edit Details
+                  </button>
                 </div>
               )}
-              {add && (
+              {addDescription && (
                 <div className="inputs">
                   <h3>Add Title</h3>
                   <input
