@@ -12,7 +12,7 @@ A basic google maps project built with React where a user can drop pins, search 
 
 ![''](https://media2.giphy.com/media/r9JVe4PULwlOP0sEsr/giphy.gif?cid=790b76110ef42b89bb4238bbe74fd4bf5d689930ab77cce6&rid=giphy.gif&ct=g)
 
-### Find me Button
+### Locate me Button
 
 ![''](https://media4.giphy.com/media/kmGPpL4RN9Spvrkpiw/giphy.gif?cid=790b76118dbce216275a5d3062d3906841d51b0b078c05c0&rid=giphy.gif&ct=g)
 
