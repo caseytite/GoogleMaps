@@ -10,6 +10,7 @@ import {
 import { formatRelative, set } from "date-fns";
 import mapStyles from "./mapStyles";
 import "@reach/combobox/styles.css";
+import "./App.css";
 
 const mapContainerStyle = {
   width: "100vw",
@@ -37,7 +38,6 @@ function App() {
   const [add, setAdd] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [show, setShow] = useState(false);
 
   const onMapClick = useCallback((event) => {
     console.log("markers", markers);
@@ -52,7 +52,6 @@ function App() {
       },
     ]);
     setAdd(false);
-    setShow(false);
   }, []);
 
   const updateMarker = (t, d) => {
@@ -64,7 +63,7 @@ function App() {
     currentMarker.desc = d;
     currentMarker.title = t;
     setMarker([...otherMarkers, currentMarker]);
-    setShow(true);
+
     setAdd(false);
     setTitle("");
     setDesc("");
@@ -92,7 +91,7 @@ function App() {
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={defaultLocation}
-        onClick={(e) => (info ? null : onMapClick(e))}
+        onClick={onMapClick}
         onLoad={onMapLoad}
         options={options}
       >
@@ -122,29 +121,31 @@ function App() {
           >
             <div>
               {!add && (
-                <>
-                  <h2>{!show ? "Your new pin!" : info.title} </h2>
+                <div>
+                  <h2>{!info.title ? "Your new pin!" : info.title} </h2>
                   <p>Created {formatRelative(info.time, new Date())}</p>
-                  {show && <p>{info.desc}</p>}
-                  <button onClick={() => setAdd(true)}>
-                    {!show ? "Add Details" : "Edit Details"}
-                  </button>
-                </>
+                  {!info.desc && <p>{info.desc}</p>}
+                  <button onClick={() => setAdd(true)}>Edit Details</button>
+                </div>
               )}
               {add && (
-                <>
+                <div className="inputs">
+                  <h3>Add Title</h3>
                   <input
                     value={title}
+                    placeholder="Title"
                     onChange={(e) => setTitle(e.target.value)}
                   ></input>
+                  <h3>Add Description</h3>
                   <input
                     value={desc}
+                    placeholder="Description"
                     onChange={(e) => setDesc(e.target.value)}
                   ></input>
                   <button onClick={() => updateMarker(title, desc)}>
                     Add Details
                   </button>
-                </>
+                </div>
               )}
             </div>
           </InfoWindow>

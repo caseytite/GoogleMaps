@@ -1,0 +1,19 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  height: 125px;
+  justify-content: space-around;
+}
+
+.inputs > *:focus {
+  outline: none;
+}
+.inputs > h3 {
+  margin: 3px 0px;
+}
+.inputs > button {
+  margin-top: 3px;
+}
+.inputs > button:hover {
+  cursor: pointer;
+}
