@@ -6,7 +6,7 @@ A basic google maps project built with React where a user can drop pins, search 
 
 ### Adding and Editing pins
 
-![''](https://media1.giphy.com/media/jVQHlC5q6z7GXRl4hH/giphy.gif?cid=790b7611a217ae173636fd5e507d0992da702c1f43c95250&rid=giphy.gif&ct=g)
+![''](https://media3.giphy.com/media/0CM8KneHGmKrL6kVFv/giphy.gif?cid=790b761146f684f7e4984d0f0d746dcb2dfccc854543d5d0&rid=giphy.gif&ct=g)
 
 ### Search for a location
 

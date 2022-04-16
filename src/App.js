@@ -121,7 +121,7 @@ function App() {
                 <div>
                   <h2>{!info.title ? "Your new pin!" : info.title} </h2>
                   <p>Created {formatRelative(info.time, new Date())}</p>
-                  {!info.desc && <p>{info.desc}</p>}
+                  {info.desc && <p>{info.desc}</p>}
                   <button onClick={() => setAddDescription(true)}>
                     Edit Details
                   </button>
